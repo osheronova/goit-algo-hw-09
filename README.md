@@ -1,38 +1,105 @@
-# goit-algo-hw-09
-Homework for Topic #9
-Welcome to the homework assignment on "Greedy Algorithms and Dynamic Programming"! 🙂
+# HW-9 — Greedy Algorithms & Dynamic Programming
+## Coin Change Problem
 
-Learning greedy algorithms and dynamic programming algorithms, along with hands-on problem-solving experience, will help you improve your optimization and algorithm analysis skills.
+## Description
 
-By completing this homework assignment:
+This homework compares two approaches for solving the coin change problem:
 
-You will be able to deepen your knowledge and understanding of the implementation of greedy algorithms and dynamic programming algorithms;
-You will be able to apply theoretical knowledge in practice: developing the functions of a greedy algorithm and a dynamic programming algorithm will allow you to understand their real-world nature and applications more easily;
-By comparing the effectiveness of two different methods for solving the same problem, you will learn how to conduct an objective analysis and understand which method can be more effective in specific conditions.
-We wish you success, and may the code be with you! 🚗✨
+- Greedy algorithm
+- Dynamic programming algorithm
 
-Homework description
-In the previous chapter, we considered an example of dividing a sum into coins. We have a set of coins [50, 25, 10, 5, 2, 1]. Imagine that you are developing a system for a cash register that has to determine the best way to give change to a customer.
+We simulate a cash register system that gives change using a fixed set of coin denominations.
 
-You need to write two functions for the cash register system that gives change to the customer:
+Coin denominations used in the task:
 
-The function of the greedy algorithm find_coins_greedy. This function should take the money given to the customer and return a dictionary with the number of coins of each denomination used to make up the amount. For example, for 113, this would be the dictionary {50: 2, 10: 1, 2: 1, 1: 1}. The algorithm should be greedy, i.e., choose the most available coin denominations first.
-Dynamic programming function find_min_coins. This function should also take an amount of change but use a dynamic programming method to find the minimum number of coins needed to generate that amount. The function should return a dictionary with the coin denominations and the number of coins needed to reach the given amount most efficiently. For example, for the sum of 113, this would be the dictionary {1: 1, 2: 1, 10: 1, 50: 2}
-Compare the performance of the greedy and dynamic programming algorithms based on their execution time or O large and pay attention to their performance for large sums. Highlight how they handle large amounts and why one algorithm may be more efficient in certain situations. Include your findings in the readme.md file for homework.
+    COINS = [50, 25, 10, 5, 2, 1]
 
-Preparing and uploading homework
-Create a public repository goit-algo-hw-09.
-Complete the assignment and submit it to your repository.
-Download the working file to your computer and attach it to the LMS in the zip format. The name of the archive should be in the format HW9_Full Name.
-Attach a link to the goit-algo-hw-09 repository and send it for verification.
-Submission format.
-Attached is the repository file in zip format with the name HW9_FULL NAME.
-Link to the repository.
-HW acceptance criteria
-Attached are links to the goit-algo-hw-09 repository and the repository file itself in zip format.
-A function that uses the principle of a greedy algorithm has been programmatically implemented. The code is executed and returns a dictionary with the number of coins of each denomination used to form a certain amount. First, the most affordable coin denominations are selected.
-A function that uses the principle of dynamic programming is programmatically implemented. The code is executed and returns a dictionary with the coin denominations and their number to achieve the specified amount most efficiently.
-Based on the estimation of the execution time of each of the two algorithms or O large, the most efficient algorithm for large amounts is determined.
-The conclusions about the effectiveness of the algorithms for this case are drawn. The decisions are presented in the form of a readme.md file for homework.
-Assessment format
-Pass/Fail
+For a given amount, the system determines how many coins of each denomination should be used.
+
+---
+
+## Task Requirements
+
+1. Implement a greedy algorithm `find_coins_greedy`:
+   - Always selects the largest possible coin first
+   - Returns `{coin: count}`
+
+2. Implement a dynamic programming algorithm `find_min_coins`:
+   - Finds the minimum number of coins
+   - Returns `{coin: count}`
+
+3. Compare both algorithms by:
+   - Execution time
+   - Big-O complexity
+   - Performance on large amounts
+
+---
+
+## Greedy Algorithm
+
+The greedy algorithm always takes the largest coin that fits into the remaining amount.
+
+Example for amount 113:
+
+    {50: 2, 10: 1, 2: 1, 1: 1}
+
+Time complexity: `O(k)`  
+Space complexity: `O(1)`
+
+---
+
+## Dynamic Programming Algorithm
+
+The dynamic programming algorithm computes the minimum number of coins for all sums from 1 to the target amount and then reconstructs the solution.
+
+Example for amount 113:
+
+    {1: 1, 2: 1, 10: 1, 50: 2}
+
+Time complexity: `O(amount × k)`  
+Space complexity: `O(amount)`
+
+---
+
+## Program Output & Results
+
+### Test for Sum = 113
+
+    TEST FOR SUM 113
+    Greedy algorithm: {50: 2, 10: 1, 2: 1, 1: 1}
+    Dynamic programming: {1: 1, 2: 1, 10: 1, 50: 2}
+
+Both algorithms return the same number of coins, only the order of denominations differs.
+
+---
+
+### Algorithm Comparison (Execution Time)
+
+    ALGORITHM COMPARISON
+    Amount   Greedy(ms)   DP(ms)       Coins Greedy   Coins DP
+    30       0.002        0.013        2              2
+    113      0.002        0.036        5              5
+    250      0.002        0.082        5              5
+    1000     0.001        0.339        20             20
+    5000     0.002        1.639        100            100
+    10000    0.001        3.172        200            200
+
+The results show that:
+- Greedy execution time remains almost constant
+- Dynamic programming time increases linearly with the amount
+
+---
+
+## Time Complexity Summary
+
+    Greedy: O(k) where k = number of coin types
+    Dynamic Programming: O(amount × k)
+
+---
+
+## Conclusions
+
+- For the coin set `[50, 25, 10, 5, 2, 1]`, the greedy algorithm is optimal and fastest.
+- Dynamic programming guarantees the minimum number of coins but becomes slower for large amounts.
+- In this task, greedy is the preferred solution, while dynamic programming serves as a universal fallback.
+
